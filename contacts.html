@@ -149,16 +149,20 @@
                             <label for="message" class="form-label">Message *</label>
                             <textarea class="form-control" name="message" id="message" rows="3" required></textarea>
                         </div>
-                        <div class="text-end">
-                            <div class="form-check">
-                                <label class="form-check-label" for="copy"> Send copy to yourseft &nbsp;</label>
-                                <input type="checkbox" value="" id="copy" /> &nbsp;&nbsp;
-                                <button type="submit" class="btn btn-primary">Send Email to Us</button>
+                        <div class="row">
+                            <div class="col">
+                                <div class="text-info" id="responseMessage"></div>
+                            </div>
+                            <div class="col">
+                                <div class="text-end">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="copy"> Send copy to yourseft &nbsp;</label>
+                                        <input type="checkbox" value="" id="copy" /> &nbsp;&nbsp;
+                                        <button type="submit" class="btn btn-primary">Send Email to Us</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="text-danger text-center" id="responseMessage"></div>
-                        
                     </form>
                 </div>
             </section>
@@ -286,14 +290,20 @@
                         if (response.status === 200) {
                             sendMail();
                         } else {
-                            document.getElementById('responseMessage').innerHTML = 'Error: Can not verify reCAPTCHA.';
+                            let responseMessage = document.getElementById('responseMessage');
+                            responseMessage.innerHTML = 'Error: Can not verify reCAPTCHA.';
+                            responseMessage.classList.remove();
+                            responseMessage.classList.toggle('text-danger');
                         }
                     }) ;
                 });
             }
 
             function sendMail() {
-                document.getElementById('responseMessage').innerHTML = 'Email sent successfully!';
+                let responseMessage = document.getElementById('responseMessage');
+                responseMessage.innerHTML = 'OK: Your message has been sent successfully.';
+                responseMessage.classList.remove();
+                responseMessage.classList.toggle('text-info');
             }
 
             
