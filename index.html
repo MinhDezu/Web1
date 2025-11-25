@@ -90,6 +90,8 @@
                 </div>
             </nav> 
         </header>
+
+        <div id="content">
         <!-- Banner -->
         <section class="container-fluid" id="banner">
             <div class="container text-white text-center">
@@ -137,33 +139,8 @@
         </section>
         
         <!--products-->
-        <section class="container">
-            <div class="row text-center py-5">
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <img src="images/icon-1.png" alt="Coffee">
-                    <h3>Coffee</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <a class="readmore btn btn-link pt-0" href="#">Read more</a>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <img src="images/icon-2.png" alt="Drinks">
-                    <h3>Drinks</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <a class="readmore btn btn-link pt-0" href="#">Read more</a>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <img src="images/icon-3.png" alt="Cakes">
-                    <h3>Cakes</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <a class="readmore btn btn-link pt-0" href="#">Read more</a>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <img src="images/icon-4.png" alt="Ice-creams">
-                    <h3>Ice-creams</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <a class="readmore btn btn-link pt-0" href="#">Read more</a>
-                </div>
-            </div>
+        <section class="container" id="products">
+            
         </section>
         
         <!-- about us-->
@@ -197,49 +174,9 @@
 
         <!-- news-->
          <section class="container py-5" id="news">
-            <h1 class="text-black-10">News</h1>
-            <div class="row py-3">
-                <div class="col">
-                    <div class="float-start me-3">
-                        <div class="date text-white text-center rounded-4 py-1">
-                            <h3>Dec. <br>
-                            25</h3>
-                        </div>
-                        <a href="#" class="btn btn-link readmore ps-0">Read more</a>
-                    </div>
-                    <div>
-                        <h3>Accumsan et</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, ex?</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="float-start me-3">
-                        <div class="date text-white text-center rounded-4 py-1">
-                            <h3>Dec. <br>
-                            25</h3>
-                        </div>
-                        <a href="#" class="btn btn-link readmore ps-0">Read more</a>
-                    </div>
-                    <div>
-                        <h3>Accumsan et</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, ex?</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="float-start me-3">
-                        <div class="date text-white text-center rounded-4 py-1">
-                            <h3>Dec. <br>
-                            25</h3>
-                        </div>
-                        <a href="#" class="btn btn-link readmore ps-0">Read more</a>
-                    </div>
-                    <div>
-                        <h3>Accumsan et</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, ex?</p>
-                    </div>
-                </div>
-            </div>
+            
          </section>
+        </div>
 
          <!-- Footer-->
           <footer class="text-center container-fluid text-white py-3">
@@ -324,8 +261,7 @@
                 options,
             );
         </script>
-        
-        
+
         <main></main>
         <footer>
             <!-- place footer here -->
@@ -342,5 +278,68 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
+
+        <!--Handelbars-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js" integrity="sha512-E1dSFxg+wsfJ4HKjutk/WaCzK7S2wv1POn1RRPGh8ZK+ag9l244Vqxji3r6wgz9YBf6+vhQEYJZpSjqWFPg9gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script src="js/24880040.js"></script>
+
+        <script id="products-template" type="text/x-handlebars-template">
+            <div class="row text-center py-5">
+                {{#each data}}
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <img src="{{imagepath}}" alt="{{name}}" 
+                    onmouseover="setActiveImagepath(this, '{{imagepath}}')"
+                    onmouseout="setActiveImagepath(this, '{{imagepath}}', false)">
+                    <h3>{{name}}</h3>
+                    <p class="text-black-50">{{summary}}</p>
+                    <a class="readmore btn btn-link pt-0" href="#" onclick="loadData('products/{{id}}', 'details-template', 'content')">Read more</a>
+                </div>
+                {{/each}}
+            </div>
+        </script>
+            
+        <script id="news-template" type="text/x-handlebars-template">
+            <h1 class="text-black-10">News</h1>
+            <div class="row py-3">
+                {{#each data}}
+                <div class="col">
+                    <div class="float-start me-3">
+                        <div class="date text-white text-center rounded-4 py-1">
+                            <h3>{{date}}</h3>
+                        </div>
+                        <a href="#" class="btn btn-link readmore ps-0" onclick="loadData('news/{{id}}', 'details-template', 'content')">Read more</a>
+                    </div>
+                    <div>
+                        <h3>{{name}}</h3>
+                        <p class="text-black-50">{{summary}}</p>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </script>
+
+        <script id="details-template" type="text/x-handlebars-template">
+            <section class="container-fluid" id="banner-small"></section>
+            {{#each data}}
+            <section class="container py-5">
+                <h1 class="pb-3">{{name}}</h1>
+                <div class="text-black-50">{{{description}}}</div>
+            </section>
+            {{/each}}
+        </script>
+        <script>
+            loadData('products', 'products-template', 'products');
+            loadData('news', 'news-template', 'news');
+
+            function setActiveImagepath(img, imagepath, isActive = true) {
+                if (isActive){
+                    img.src = imagepath.replace('.', '-active.');
+                }else {
+                    img.src = imagepath;
+                }
+                img.nextElementSibling.classList.toggle('web1-text-blue');
+            }
+        </script>
     </body>
 </html>
