@@ -75,11 +75,13 @@
                             </li>
                            
                         </ul>
-                        <form class="d-flex my-2 my-lg-0 border rounded-pill" id="formSearch">
+                        <form class="d-flex my-2 my-lg-0 border rounded-pill" id="formSearch" method="GET" action="search.html">
                             <input
                                 class="form-control ms-2 border-0"
                                 type="text"
                                 placeholder="Search"
+                                name="keyword"
+                                id="keyword" required
                             />
                             <button
                                 class="btn my-2 my-sm-0 border-0"

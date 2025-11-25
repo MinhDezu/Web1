@@ -96,18 +96,7 @@
 
             <section id="banner-small"></section>
 
-
-
-            <section class="container py-5">
-                <h1>Gallery</h1>
-                <strong>Filter by catergory:</strong>
-                <ul class="nav" id="gallery-categories">
-                    
-                </ul>
-                <div class="row py-2" id="gallery">
-                    
-                </div>
-            </section>
+            <section class="container py-5" id="content"></section>
          <!-- Footer-->
           <footer class="text-center container-fluid text-white py-3">
                 <ul
@@ -215,38 +204,38 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js" integrity="sha512-E1dSFxg+wsfJ4HKjutk/WaCzK7S2wv1POn1RRPGh8ZK+ag9l244Vqxji3r6wgz9YBf6+vhQEYJZpSjqWFPg9gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="js/24880040.js"></script>
 
-        <script id="gallery-categories-template" type="text/x-handlebars-template">
-            <li class="nav-item">
-                <a class="nav-link disabled ps-0" href="#"
-                onclick="loadData('gallery', 'gallery-template', 'gallery'); disableLink(this);">Show all</a>
-            </li>
+        <script id="search-template" type="text/x-handlebars-template">
             {{#each data}}
-            <li class="nav-item">
-                <a class="nav-link" href="#"
-                onclick="loadData('gallery/categories/{{id}}', 'gallery-template', 'gallery'); disableLink(this);">{{name}}</a>
-            </li>
+            <div class="py-3">
+                <a class="text-decoration-none" href="#" onclick="loadData('{{type}}/{{id}}', 'detail-template', 'content')">
+                <h1 class="text-black">{{name}}</h1></a>
+                <div class="text-black-50">{{summary}}</div>
+            </div>
             {{/each}}
         </script>
 
-        <script id="gallery-template" type="text/x-handlebars-template">
+        <script id="detail-template" type="text/x-handlebars-template">
             {{#each data}}
-             <div class="col-md-3">
-                <img src="{{thumbpath}}" alt="{{name}}" class="img-thumbnail mb-3">
-             </div>
+            <h1>{{name}}</h1>
+            {{#if imagepath}}
+            <img src="{{imagepath}}" alt="{{name}}" class="float-start me-3">
+            {{/if}}
+            <div class="text-black-50">{{{description}}}</div>
             {{/each}}
         </script>
 
         <script>
             checkLogin();
-            loadData('gallery-categories', 'gallery-categories-template', 'gallery-categories');
-            loadData('gallery', 'gallery-template', 'gallery');
-            function disableLink(link){
-                let links = document.querySelectorAll('#gallery-categories a');
-                for (let i=0; i<links.length; i++){
-                    links[i].classList.remove('disabled');
+
+            let searchParams = new URLSearchParams(location.search);
+            let keyword = searchParams.get('keyword');
+            if (keyword) {
+                keyword = keyword.trim();
+                if (keyword !== '') {
+                    loadData(`search?keyword=${keyword}`, 'search-template', 'content');
                 }
-                link.classList.toggle('disabled');
             }
+
         </script>
     </body>
 </html>
