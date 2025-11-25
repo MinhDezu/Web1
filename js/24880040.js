@@ -13,7 +13,7 @@ async function loadData(request, templateId, viewId) {
                 view.innerHTML = template(context);
 }
 
-function getAuthenticateToken(username, password) {
+async function getAuthenticateToken(username, password) {
     let response = await fetch(`${AUTHENTICATION_API}/authenticate`, {
         method: 'POST',
         headers: {
